@@ -74,3 +74,20 @@ Definimi i tipeve të të dhënave
 | hdi       | diff_hdi_phdi_xxxx                                              | Float     | Difference from HDI value (%) in year xxxx                                                                  |
 | hdi       | co2_prod_xxxx                                                   | Float     | Carbon dioxide emissions per capita (production) (tonnes) in year xxxx                                      |
 | hdi       | mf_xxxx                                                         | Float     | Material footprint per capita (tonnes) in year xxxx                                                        |
+
+## Missing Data Percentage per Column
+
+This table shows the percentage of missing data for each column in the dataset.
+
+| Column                                                            | Missing Data (%) |
+|-------------------------------------------------------------------|------------------|
+| Birth rate, crude (per 1,000 people)                              | 8.11%           |
+| Death rate, crude (per 1,000 people)                              | 8.30%           |
+| Electric power consumption (kWh per capita)                       | 53.02%          |
+| GDP (USD)                                                         | 23.06%          |
+| GDP per capita (USD)                                              | 23.09%          |
+| Individuals using the Internet (% of population)                  | 59.32%          |
+| Infant mortality rate (per 1,000 live births)                     | 19.80%          |
+| Life expectancy at birth (years)                                  | 10.23%          |
+| Population density (people per sq. km of land area)               | 4.85%           |
+| Unemployment (% of total labor force) (modeled ILO estimate)      | 58.17%          |
