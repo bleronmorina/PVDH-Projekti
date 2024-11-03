@@ -91,3 +91,15 @@ This table shows the percentage of missing data for each column in the dataset.
 | Life expectancy at birth (years)                                  | 10.23%          |
 | Population density (people per sq. km of land area)               | 4.85%           |
 | Unemployment (% of total labor force) (modeled ILO estimate)      | 58.17%          |
+
+
+## Preprocessing Data
+
+- Added MergeCode.py as a processing script, which takes the unprocessed DataSets and combines them into a single dataset based on the CountryCode and Year columns. This script also filters the Years >= 1990, where most rows before that Year do not contain as much data.
+- Added MergeCode v2.py as a processing script, which now takes the Processed DataSets and combines them in a single dataset. What this script does extra, is it takes the new DataSet Countries.csv.
+- Added CountryNormalization.py as a processing script, this script takes all the Country information from the WorldBank csv, and creates a new Countries.csv based on the unique values. Afterwards it fetches the HDI Data and WorldBank csv, removes the extra Country columns, therefore normalizing them; for whenever we need the extra Country information we can use the merged DataSet or simply join the tables together.
+
+- Merged_HDI_WorldBank_Data.csv - A processed DataSet, which is a merge between the Unprocessed datasets of HDI and WorldBank, based on the CountryCode and Year
+- Merged_HDI_WorldBank_Data v2.csv - A processed DataSet, which the same as the previous csv, now instead uses the Processed DataSets of HDI Data v3, WorldBank v2 and Countries as the merge elements
+- HDI Data v3.csv -A processed DataSet, which doesn't have the extra columns "country" and "region"
+- WorldBank v2.csv -A processed DataSet, which doesn't have the extra columns "Country Name" and "Region"
