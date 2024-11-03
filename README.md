@@ -269,14 +269,24 @@ By removing these columns, the dataset now focuses on core indicators that direc
 | `Population density (people per sq. km of land area)`          | 1.65             |
 | `Unemployment (% of total labor force) (modeled ILO estimate)` | 9.40             |
 
-
 ## Data Scraping
-  - `Script: ScrapperForElectricityConsumption.py`
-  - `Purpose: This script scrapes Wikipedia to obtain the latest electricity consumption data for countries worldwide. It focuses on gathering specific metrics like consumption per capita, year, and population.`
-  - `Output: The data collected is saved as ElectricityConsumption.csv for further processing.`
+
+- `Script: ScrapperForElectricityConsumption.py`
+- `Purpose: This script scrapes Wikipedia to obtain the latest electricity consumption data for countries worldwide. It focuses on gathering specific metrics like consumption per capita, year, and population.`
+- `Output: The data collected is saved as ElectricityConsumption.csv for further processing.`
 
 ## Handling Missing Values
 
- - `Script: HandlingElectricityConsumptionMissingValues.py`
- - `Purpose: This script takes the scraped data (ElectricityConsumption.csv) and fills in missing values for the "Electric power consumption (kWh per capita)" field in the WorldBank v2.csv dataset. It aligns records by the "Country      Code" field to ensure accurate matching and integration of values.`
-  - `Output: The final dataset with filled missing values is saved as WorldBank v3.csv.`
+- `Script: HandlingElectricityConsumptionMissingValues.py`
+- `Purpose: This script takes the scraped data (ElectricityConsumption.csv) and fills in missing values for the "Electric power consumption (kWh per capita)" field in the WorldBank v2.csv dataset. It aligns records by the "Country      Code" field to ensure accurate matching and integration of values.`
+- `Output: The final dataset with filled missing values is saved as WorldBank v3.csv.`
+
+In the process of preparing the dataset, we encountered missing values in certain columns. After evaluating the nature and distribution of these missing values, we chose to ignore most of them (except for the Electricity Consumption, mentioned above) for the following reasons:
+
+1. **Data Completeness for Core Analysis**: The majority of essential indicators had sufficient data coverage across countries and years, ensuring that core analyses would remain unaffected by the missing values. Key economic, health, and education metrics provided a complete enough dataset for our primary objectives.
+
+2. **Maintaining Dataset Integrity**: Filling missing values, especially for indicators with sparse data coverage, could introduce bias or distort historical trends. Rather than risking inaccurate interpolations, we opted to work with available data, especially for cases where historical data was patchy or discontinuous.
+
+3. **Focus on Reliable Trends**: Many of the missing values occurred in indicators that were not consistently tracked or recorded across countries or years, particularly in older records. Ignoring these missing values allows us to focus on trends that have reliable historical continuity without adding potentially misleading estimates.
+
+4. **Impact on Temporal Analysis**: Temporal trends are a core part of our analysis, and many methods of imputing missing values, such as forward filling or averaging, would not preserve the accuracy of year-on-year changes. To retain the integrity of these trends, we chose to ignore missing values rather than apply potentially inappropriate imputation techniques.
