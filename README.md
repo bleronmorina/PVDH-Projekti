@@ -1,5 +1,16 @@
 # PVDH-Projekti
  Projekti nga lënda "Përgatitja dhe vizualizimi i të dhënave"
+### Detyrat për Pjesën e I-rë - (15%)
+
+- **Para-procesimi për Përgatitjen e të Dhënave për Analizë**
+  - Mbledhja e të dhënave, definimi i tipeve të dhënave, dhe vlerësimi i kualitetit të të dhënave.
+  - Integrimi, agregimi, mostrimi, dhe pastrimi i të dhënave.
+  - Identifikimi dhe strategjia e trajtimit për vlerat e zbrazëta.
+
+- **Reduktimi i Dimensionit dhe Përpunimi i Vetive**
+  - Zgjedhja e nën-bashkësisë së vetive dhe krijimi i vetive të reja.
+  - Diskretizimi, binarizimi, dhe transformimi i të dhënave.
+
 
 
 ## Mbledhja e të dhënave
@@ -95,14 +106,87 @@ This table shows the percentage of missing data for each column in the dataset.
 
 ## Preprocessing Data
 
-- Added MergeCode.py as a processing script, which takes the unprocessed DataSets and combines them into a single dataset based on the CountryCode and Year columns. This script also filters the Years >= 1990, where most rows before that Year do not contain as much data.
-- Added MergeCode v2.py as a processing script, which now takes the Processed DataSets and combines them in a single dataset. What this script does extra, is it takes the new DataSet Countries.csv.
-- Added CountryNormalization.py as a processing script, this script takes all the Country information from the WorldBank csv, and creates a new Countries.csv based on the unique values. Afterwards it fetches the HDI Data and WorldBank csv, removes the extra Country columns, therefore normalizing them; for whenever we need the extra Country information we can use the merged DataSet or simply join the tables together.
+## Data Transformation: Reshaping and Reducing Columns
 
-- Merged_HDI_WorldBank_Data.csv - A processed DataSet, which is a merge between the Unprocessed datasets of HDI and WorldBank, based on the CountryCode and Year
-- Merged_HDI_WorldBank_Data v2.csv - A processed DataSet, which the same as the previous csv, now instead uses the Processed DataSets of HDI Data v3, WorldBank v2 and Countries as the merge elements
-- HDI Data v3.csv -A processed DataSet, which doesn't have the extra columns "country" and "region"
-- WorldBank v2.csv -A processed DataSet, which doesn't have the extra columns "Country Name" and "Region"
+### Overview
+
+The original dataset contained many columns, with each indicator represented separately for each year (e.g., `GDP_1990`, `GDP_1991`). To improve usability, the dataset was transformed from a "wide" format to a "long" format, where each indicator-year pair became a separate row. This approach allows for more flexible analysis of indicators over time.
+
+### Transformation Process
+
+The following steps describe the transformation process:
+
+1. **Melting the Data**:
+   - The dataset was reshaped using a "melt" function, which converted each year-specific indicator column into a separate row.
+   - This reduced the width of the dataset and allowed us to treat each year of an indicator as an individual observation.
+
+2. **Extracting Indicator and Year**:
+   - We extracted two distinct columns from the combined `indicator_year` column:
+     - `indicator`: representing the name of each indicator (e.g., `GDP`, `Life_Expectancy`).
+     - `year`: representing the specific year of the indicator.
+   - This involved splitting strings in `indicator_year` (e.g., `GDP_1990`) into separate `indicator` and `year` columns for easier sorting and analysis.
+
+3. **Pivoting to Reshape the Data**:
+   - The data was reshaped again using a pivot table, converting the unique indicators back into columns with `year` as a separate variable.
+   - This created a tidy structure where each row represents a unique combination of country, year, and a set of indicators.
+### Column Removal: Simplifying the Dataset
+
+As part of data preprocessing, several columns were removed from the dataset. This step was taken to focus on relevant indicators and reduce noise, ultimately streamlining the dataset for analysis. Below is a detailed explanation of each column removed and the rationale behind its exclusion.
+
+#### Columns Removed
+
+The following columns were removed from the dataset:
+
+- `loss`
+- `hdi_rank`
+- `gii_rank`
+- `gdi`
+- `gdi_group`
+- `rankdiff_hdi_phdi`
+
+#### Reasons for Removal
+
+Each column was evaluated for relevance to the project goals. Here’s why each of these columns was removed:
+
+| Column Name           | Description                                                                                         | Reason for Removal                                                                                           |
+|-----------------------|-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `loss`                | Indicates a percentage loss in human development due to inequality.                                  | The dataset already includes other inequality metrics, making this metric redundant for our analysis.       |
+| `hdi_rank`            | Global rank of each country based on the Human Development Index (HDI).                              | Rankings are less informative than HDI scores themselves and can be biased by annual changes or fluctuations. |
+| `gii_rank`            | Global rank of each country based on the Gender Inequality Index (GII).                              | Similar to `hdi_rank`, this rank offers limited analytical value compared to the GII score itself.           |
+| `gdi`                 | Gender Development Index, comparing HDI values between men and women.                                | This was removed to avoid duplication, as other gender-disaggregated metrics are included separately.        |
+| `gdi_group`           | Classification based on the Gender Development Index.                                                | Categorical grouping based on `gdi`, which isn’t needed for numerical analysis in this context.              |
+| `rankdiff_hdi_phdi`   | Difference in rank between HDI and inequality-adjusted HDI (pHDI).                                   | Analysis focuses on the HDI and pHDI values themselves; rank differences do not provide additional insight.  |
+
+#### Summary
+
+By removing these columns, the dataset now focuses on core indicators that directly contribute to the analysis. This step reduces complexity and ensures that only the most relevant data points are retained, improving both the efficiency and clarity of further data processing and modeling.
+
+
+### Scripts and Processed Datasets
+
+- **MergeCode.py**  
+  A processing script that combines unprocessed datasets into a single dataset based on the `CountryCode` and `Year` columns. This script also filters for `Year >= 1990`, as most rows before 1990 contain limited data.
+
+- **MergeCode v2.py**  
+  An updated processing script that merges the processed datasets into a single dataset. This version also incorporates data from a new file, `Countries.csv`, to enhance country-specific information.
+
+- **CountryNormalization.py**  
+  A processing script that extracts all unique country information from the World Bank CSV file, creating a new file called `Countries.csv` with these unique values. It then fetches data from the HDI and World Bank datasets, removing extra country columns to standardize them. When additional country information is needed, this dataset or a join operation with `Countries.csv` can be used.
+
+### Processed Datasets
+
+- **Merged_HDI_WorldBank_Data.csv**  
+  A processed dataset created by merging the unprocessed HDI and World Bank datasets, using `CountryCode` and `Year` as the keys.
+
+- **Merged_HDI_WorldBank_Data v2.csv**  
+  A refined processed dataset similar to the previous version but using the processed datasets `HDI Data v3`, `WorldBank v2`, and `Countries.csv` as merge sources.
+
+- **HDI Data v3.csv**  
+  A processed dataset without the extra columns `country` and `region`.
+
+- **WorldBank v2.csv**  
+  A processed dataset without the extra columns `Country Name` and `Region`.
+
 
 
 ## Definimi i tipeve të të dhënave pas integrimit të tabelave
