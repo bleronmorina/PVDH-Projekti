@@ -14,6 +14,7 @@ Projekti nga lënda "Përgatitja dhe vizualizimi i të dhënave"
   - Zgjedhja e nën-bashkësisë së vetive dhe krijimi i vetive të reja.
   - Diskretizimi, binarizimi, dhe transformimi i të dhënave.
 
+---
 ## Data Collection
 
 For the collection of data for the World Economic Indicators dataset, various reliable sources were used, including data from the World Bank and the Human Development Index (HDI) from the United Nations (UN). The World Bank data covers the period from 1960 to 2018 and includes various economic and development indicators, such as electricity consumption, GDP per capita, life expectancy, and many others.
@@ -23,6 +24,8 @@ To add more information on the social and economic development of countries, dat
 Since the data is divided into 3 tables with a total of 12,657 records and 58 fields, it is important to structure and prepare it in a way that facilitates analysis. The data includes temporal and spatial variables, which help track changes over the years in different countries.
 
 This data collection process aims to provide a comprehensive view of economic and social indicators for global development, enabling analysis of economic growth, improvements in healthcare and education, as well as differences between high- and low-income countries.
+
+---
 
 ## Defining Data Types
 
@@ -86,6 +89,7 @@ This data collection process aims to provide a comprehensive view of economic an
 | hdi       | diff_hdi_phdi_xxxx                                           | Float     | Difference from HDI value (%) in year xxxx                                                   |
 | hdi       | co2_prod_xxxx                                                | Float     | Carbon dioxide emissions per capita (production) (tonnes) in year xxxx                       |
 | hdi       | mf_xxxx                                                      | Float     | Material footprint per capita (tonnes) in year xxxx                                          |
+---
 
 ## Preprocessing Data
 
@@ -115,6 +119,8 @@ The following steps describe the transformation process:
    - The data was reshaped again using a pivot table, converting the unique indicators back into columns with `year` as a separate variable.
    - This created a tidy structure where each row represents a unique combination of country, year, and a set of indicators.
 
+---
+
 ### Column Removal: Simplifying the Dataset
 
 As part of data preprocessing, several columns were removed from the dataset. This step was taken to focus on relevant indicators and reduce noise, ultimately streamlining the dataset for analysis. Below is a detailed explanation of each column removed and the rationale behind its exclusion.
@@ -143,9 +149,12 @@ Each column was evaluated for relevance to the project goals. Here’s why each 
 | `gdi_group`         | Classification based on the Gender Development Index.                   | Categorical grouping based on `gdi`, which isn’t needed for numerical analysis in this context.               |
 | `rankdiff_hdi_phdi` | Difference in rank between HDI and inequality-adjusted HDI (pHDI).      | Analysis focuses on the HDI and pHDI values themselves; rank differences do not provide additional insight.   |
 
+
 #### Summary
 
 By removing these columns, the dataset now focuses on core indicators that directly contribute to the analysis. This step reduces complexity and ensures that only the most relevant data points are retained, improving both the efficiency and clarity of further data processing and modeling.
+
+---
 
 ### Scripts and Processed Datasets
 
@@ -157,7 +166,8 @@ By removing these columns, the dataset now focuses on core indicators that direc
 
 - **CountryNormalization.py**  
   A processing script that extracts all unique country information from the World Bank CSV file, creating a new file called `Countries.csv` with these unique values. It then fetches data from the HDI and World Bank datasets, removing extra country columns to standardize them. When additional country information is needed, this dataset or a join operation with `Countries.csv` can be used.
-
+  
+---
 ### Processed Datasets
 
 - **Merged_HDI_WorldBank_Data.csv**  
@@ -172,6 +182,7 @@ By removing these columns, the dataset now focuses on core indicators that direc
 - **WorldBank v2.csv**  
   A processed dataset without the extra columns `Country Name` and `Region`.
 
+---
 ## Defining Data Types After Table Integration
 
 | Table                                     | Field                                                        | Data Type | Description                                                                                  |
@@ -226,6 +237,8 @@ By removing these columns, the dataset now focuses on core indicators that direc
 | Merged \_HDI_Worldbank_Data v2            | Population density (people per sq. km of land area)          | Float     | The number of people per square kilometer in the country                                     |
 | Merged \_HDI_Worldbank_Data v2            | Unemployment (% of total labor force) (modeled ILO estimate) | Float     | The percentage of the labor force that is not employed                                       |
 
+---
+
 ### Missing Data Percentage per Column
 
 | Column                                                         | Missing Data (%) |
@@ -269,11 +282,14 @@ By removing these columns, the dataset now focuses on core indicators that direc
 | `Population density (people per sq. km of land area)`          | 1.65             |
 | `Unemployment (% of total labor force) (modeled ILO estimate)` | 9.40             |
 
+---
 ## Data Scraping
 
 - `Script: ScrapperForElectricityConsumption.py`
 - `Purpose: This script scrapes Wikipedia to obtain the latest electricity consumption data for countries worldwide. It focuses on gathering specific metrics like consumption per capita, year, and population.`
 - `Output: The data collected is saved as ElectricityConsumption.csv for further processing.`
+
+---
 
 ## Handling Missing Values
 
@@ -290,3 +306,119 @@ In the process of preparing the dataset, we encountered missing values in certai
 3. **Focus on Reliable Trends**: Many of the missing values occurred in indicators that were not consistently tracked or recorded across countries or years, particularly in older records. Ignoring these missing values allows us to focus on trends that have reliable historical continuity without adding potentially misleading estimates.
 
 4. **Impact on Temporal Analysis**: Temporal trends are a core part of our analysis, and many methods of imputing missing values, such as forward filling or averaging, would not preserve the accuracy of year-on-year changes. To retain the integrity of these trends, we chose to ignore missing values rather than apply potentially inappropriate imputation techniques.
+
+### Data Column Subsets
+
+The dataset contains a variety of indicators related to economic, demographic, health, and educational metrics. For clarity, the columns are organized into the following subsets:
+
+---
+
+#### 1. Identification and Basic Information
+   - `Country Code`: ISO3 country code.
+   - `Country`: Full country name.
+   - `Region`: Geographical region of the country.
+   - `hdicode`: HDI classification code.
+   - `Year`: The year of the data record.
+   - `IncomeGroup`: Income classification (e.g., Low, Middle, High).
+
+---
+
+#### 2. Economic Indicators
+   - `co2_prod`: CO2 production.
+   - `gnipc`: Gross National Income per capita.
+   - `gni_pc_f`: GNI per capita for females.
+   - `gni_pc_m`: GNI per capita for males.
+   - `GDP (USD)`: Gross Domestic Product in USD.
+   - `GDP per capita (USD)`: GDP per capita in USD.
+   - `Electric power consumption (kWh per capita)`: Per capita electricity consumption.
+   - `Unemployment (% of total labor force) (modeled ILO estimate)`: Unemployment rate based on ILO model.
+
+---
+
+#### 3. Health Indicators
+   - `abr`: Adolescent birth rate.
+   - `mmr`: Maternal mortality ratio.
+   - `Infant mortality rate (per 1,000 live births)`: Infant mortality rate.
+   - `Life expectancy at birth (years)`: Life expectancy.
+   - `le`: General life expectancy.
+   - `le_f`: Life expectancy for females.
+   - `le_m`: Life expectancy for males.
+   - `ihdi`: Inequality-adjusted HDI.
+   - `coef_ineq`: Coefficient of inequality.
+   - `ineq_edu`: Inequality in education.
+   - `ineq_inc`: Inequality in income.
+   - `ineq_le`: Inequality in life expectancy.
+   - `Individuals using the Internet (% of population)`: Internet usage percentage.
+
+---
+
+#### 4. Education Indicators
+   - `eys`: Expected years of schooling.
+   - `eys_f`: Expected years of schooling for females.
+   - `eys_m`: Expected years of schooling for males.
+   - `mys`: Mean years of schooling.
+   - `mys_f`: Mean years of schooling for females.
+   - `mys_m`: Mean years of schooling for males.
+   - `se_f`: School enrollment rate for females.
+   - `se_m`: School enrollment rate for males.
+   - `pr_f`: Primary school completion rate for females.
+   - `pr_m`: Primary school completion rate for males.
+   - `gii`: Gender Inequality Index.
+   - `mf`: Male-to-female ratio.
+
+---
+
+#### 5. Demographic Indicators
+   - `Population density (people per sq. km of land area)`: Population density.
+   - `Birth rate, crude (per 1,000 people)`: Crude birth rate.
+   - `Death rate, crude (per 1,000 people)`: Crude death rate.
+   - `lfpr_f`: Labor force participation rate for females.
+   - `lfpr_m`: Labor force participation rate for males.
+
+---
+
+#### 6. Human Development Index (HDI) and Related Metrics
+   - `hdi`: Human Development Index.
+   - `hdi_f`: HDI for females.
+   - `hdi_m`: HDI for males.
+   - `diff_hdi_phdi`: Difference between HDI and pHDI.
+   - `phdi`: Poverty-adjusted HDI.
+
+---
+
+Each subset is organized to provide a clear view of indicators in categories such as economic, health, education, demographic, and human development. This structure supports targeted analyses in each domain.
+
+
+### Discretization, Binarization, and Feature Creation
+
+In this project, there was no need to apply discretization or binarization techniques, nor was there a need to create or calculate new columns. Here’s why:
+
+- **Discretization and Binarization**:  
+  Discretization (converting continuous variables into discrete categories) and binarization (transforming data into binary form) are often useful for categorical or classification-based analyses. However, in this dataset, most variables were already well-suited for analysis in their continuous form. Discretizing or binarizing these continuous indicators would result in a significant loss of information, reducing the granularity needed for effective analysis of trends over time.
+
+- **Feature Creation**:  
+  New feature creation, or generating additional columns, was unnecessary because the dataset already contained a comprehensive set of indicators that adequately represent the data's underlying dimensions. The dataset includes variables that cover economic, educational, health, and environmental aspects, providing a well-rounded basis for analysis without needing additional derived features.
+
+Thus, by keeping the data in its original form, we preserve its detail and ensure the dataset remains interpretable and aligned with the project’s goals.
+
+---
+
+### Explanation for Not Performing Aggregation
+
+In this project, certain aggregation methods were not applied due to the following reasons:
+
+1. **Temporal Aggregation**:
+   - We chose not to average data over time periods (e.g., decades) or use snapshots from specific years. Instead, the dataset maintains yearly data to preserve the granularity of changes over time. This allows for detailed analysis of year-over-year trends, which would be lost with temporal aggregation.
+   - By keeping yearly records intact, we retain the ability to observe shorter-term fluctuations and trends, which can be valuable for identifying patterns that might be obscured in broader averages.
+
+2. **Geographic Aggregation**:
+   - Data was not aggregated by region or income group in order to preserve individual country-level data. Aggregating by region could obscure country-specific trends and disparities, especially since countries within the same region may have significant differences in economic, social, and health indicators.
+   - This approach ensures that we can conduct detailed analyses at the country level, providing a clearer picture of each country’s unique trajectory rather than generalizing across regions.
+
+3. **Indicator-Specific Aggregation**:
+   - Weighted averages or medians were not calculated for specific indicators, as our focus was on maintaining raw data values for each indicator. This decision was made to avoid assumptions about the relative importance of indicators across different countries.
+   - Retaining individual values without weighting allows for more flexibility in analysis, as we can apply various techniques as needed without having pre-aggregated values that might influence results.
+
+By not performing these aggregation methods, we preserved the full detail of the dataset, enabling a more granular analysis of trends and patterns on a year-by-year and country-by-country basis.
+
+---
