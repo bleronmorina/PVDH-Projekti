@@ -2,7 +2,7 @@
  Projekti nga lënda "Përgatitja dhe vizualizimi i të dhënave"
 
 
-Mbledhja e të dhënave
+## Mbledhja e të dhënave
 
 Për mbledhjen e të dhënave për datasetin World Economic Indicators, janë përdorur burime të ndryshme të besueshme që përfshijnë të dhënat nga Banka Botërore dhe Indeksi i Zhvillimit Njerëzor (HDI) nga Kombet e Bashkuara (UN). Të dhënat e Bankës Botërore mbulojnë periudhën nga viti 1960 deri në 2018 dhe përfshijnë tregues të ndryshëm ekonomikë dhe të zhvillimit, si konsumi i energjisë elektrike, GDP për frymë, jetëgjatësia, dhe shumë të tjera.
 Për të shtuar më shumë informacion mbi zhvillimin social dhe ekonomik të vendeve, janë përfshirë të dhëna nga HDI, të cilat përfshijnë tregues të tjerë të lidhur me jetëgjatësinë, GDP për frymë, dhe arritjet në arsim për çdo vend nga viti 1990 deri në 2021. Këto të dhëna u përdorën për të ndjekur zhvillimin, ndikimin mjedisor, dhe pabarazinë në vendet e ndryshme.
@@ -11,7 +11,7 @@ Ky proces i mbledhjes së të dhënave synon të sigurojë një pamje gjithëpë
 
 
 
-Definimi i tipeve të të dhënave
+## Definimi i tipeve të të dhënave
 
 
 | Table     | Field                                                           | Data Type | Description                                                                                                 |
@@ -103,3 +103,60 @@ This table shows the percentage of missing data for each column in the dataset.
 - Merged_HDI_WorldBank_Data v2.csv - A processed DataSet, which the same as the previous csv, now instead uses the Processed DataSets of HDI Data v3, WorldBank v2 and Countries as the merge elements
 - HDI Data v3.csv -A processed DataSet, which doesn't have the extra columns "country" and "region"
 - WorldBank v2.csv -A processed DataSet, which doesn't have the extra columns "Country Name" and "Region"
+
+
+## Definimi i tipeve të të dhënave pas integrimit të tabelave
+
+
+| Table                       | Field                                               | Data Type | Description                                                                                                  |
+|-----------------------------|-----------------------------------------------------|-----------|--------------------------------------------------------------------------------------------------------------|
+| Merged _HDI_Worldbank_Data v2 | Country Code                                      | String    | The three letter code representing the country                                                               |
+| Merged _HDI_Worldbank_Data v2 | Country                                           | String    | The name of the country                                                                                      |
+| Merged _HDI_Worldbank_Data v2 | Region                                            | String    | The World Bank region of the country                                                                         |
+| Merged _HDI_Worldbank_Data v2 | hdicode                                           | String    | The HDI grouping from the UN                                                                                 |
+| Merged _HDI_Worldbank_Data v2 | Year                                              | Integer   | The Year in which the statistics were recorded                                                               |
+| Merged _HDI_Worldbank_Data v2 | co2_prod                                          | Float     | Carbon dioxide emissions per capita (production) (tonnes) in year xxxx                                       |
+| Merged _HDI_Worldbank_Data v2 | abr                                               | Float     | Adolescent birth rate (births per 1000 women aged 15-19) in year xxxx                                        |
+| Merged _HDI_Worldbank_Data v2 | coef_ineq                                         | Float     | Coefficient of human inequality in year xxxx                                                                 |
+| Merged _HDI_Worldbank_Data v2 | diff_hdi_phdi                                     | Float     | Difference from HDI value (%) in year xxxx                                                                   |
+| Merged _HDI_Worldbank_Data v2 | eys                                               | Float     | The country's expected years of schooling                                                                    |
+| Merged _HDI_Worldbank_Data v2 | eys_f                                             | Float     | Female expected years of schooling in year xxxx                                                              |
+| Merged _HDI_Worldbank_Data v2 | eys_m                                             | Float     | Male expected years of schooling in year xxxx                                                                |
+| Merged _HDI_Worldbank_Data v2 | gii                                               | Float     | Gender inequality index in year xxxx                                                                         |
+| Merged _HDI_Worldbank_Data v2 | gni_pc_f                                          | Float     | Female GNI per capita in year xxxx                                                                           |
+| Merged _HDI_Worldbank_Data v2 | gni_pc_m                                          | Float     | Male GNI per capita in year xxxx                                                                             |
+| Merged _HDI_Worldbank_Data v2 | gnipc                                             | Float     | The gross national income per capita in 2017 PPP dollars                                                     |
+| Merged _HDI_Worldbank_Data v2 | hdi                                               | Float     | The country's HDI in year xxxx                                                                               |
+| Merged _HDI_Worldbank_Data v2 | hdi_f                                             | Float     | Female HDI in year xxxx                                                                                      |
+| Merged _HDI_Worldbank_Data v2 | hdi_m                                             | Float     | Male HDI in year xxxx                                                                                        |
+| Merged _HDI_Worldbank_Data v2 | ihdi                                              | Float     | Inequality Adjusted HDI in year xxxx                                                                         |
+| Merged _HDI_Worldbank_Data v2 | ineq_edu                                          | Float     | Inequality in education in year xxxx                                                                         |
+| Merged _HDI_Worldbank_Data v2 | ineq_inc                                          | Float     | Inequality in income in year xxxx                                                                            |
+| Merged _HDI_Worldbank_Data v2 | ineq_le                                           | Float     | Inequality in life expectancy in year xxxx                                                                   |
+| Merged _HDI_Worldbank_Data v2 | le                                                | Float     | The country's life expectancy in year xxxx                                                                   |
+| Merged _HDI_Worldbank_Data v2 | le_f                                              | Float     | Female life expectancy at birth in year xxxx                                                                 |
+| Merged _HDI_Worldbank_Data v2 | le_m                                              | Float     | Male life expectancy at birth in year xxxx                                                                   |
+| Merged _HDI_Worldbank_Data v2 | lfpr_f                                            | Float     | Labour force participation rate, female (% ages 15 and older) in year xxxx                                   |
+| Merged _HDI_Worldbank_Data v2 | lfpr_m                                            | Float     | Labour force participation rate, male (% ages 15 and older) in year xxxx                                     |
+| Merged _HDI_Worldbank_Data v2 | mf                                                | Float     | Material footprint per capita (tonnes) in year xxxx                                                          |
+| Merged _HDI_Worldbank_Data v2 | mmr                                               | Float     | Maternal Mortality Ratio (deaths per 100,000 live births) in year xxxx                                       |
+| Merged _HDI_Worldbank_Data v2 | mys                                               | Float     | The country's mean years of schooling                                                                        |
+| Merged _HDI_Worldbank_Data v2 | mys_f                                             | Float     | Female mean years of schooling in year xxxx                                                                  |
+| Merged _HDI_Worldbank_Data v2 | mys_m                                             | Float     | Male mean years of schooling in year xxxx                                                                    |
+| Merged _HDI_Worldbank_Data v2 | phdi                                              | Float     | Planetary pressures-adjusted Human Development Index (value) in year xxxx                                    |
+| Merged _HDI_Worldbank_Data v2 | pr_f                                              | Float     | Share of seats in parliament, female (% held by women) in year xxxx                                         |
+| Merged _HDI_Worldbank_Data v2 | pr_m                                              | Float     | Share of seats in parliament, male (% held by men) in year xxxx                                             |
+| Merged _HDI_Worldbank_Data v2 | se_f                                              | Float     | Population with at least some secondary education, female (% ages 25 and older) in year xxxx                |
+| Merged _HDI_Worldbank_Data v2 | se_m                                              | Float     | Population with at least some secondary education, male (% ages 25 and older) in year xxxx                  |
+| Merged _HDI_Worldbank_Data v2 | IncomeGroup                                       | String    | The World Bank Income Group of the country                                                                   |
+| Merged _HDI_Worldbank_Data v2 | Birth rate, crude (per 1,000 people)              | Float     | The Birth rate per 1000 people in the country                                                                |
+| Merged _HDI_Worldbank_Data v2 | Death rate, crude (per 1,000 people)              | Float     | The death rate per 1000 people in the country                                                                |
+| Merged _HDI_Worldbank_Data v2 | Electric power consumption (kWh per capita)       | Float     | The electricity consumption per person in kilowatt-hours in the country                                      |
+| Merged _HDI_Worldbank_Data v2 | GDP (USD)                                         | Float     | The gross domestic product, or total economic output of the country                                          |
+| Merged _HDI_Worldbank_Data v2 | GDP per capita (USD)                              | Float     | The gross domestic product, or economic output per person in the country                                     |
+| Merged _HDI_Worldbank_Data v2 | Individuals using the Internet (% of population)  | Float     | The percentage of individuals using the internet in each country                                             |
+| Merged _HDI_Worldbank_Data v2 | Infant mortality rate (per 1,000 live births)     | Float     | The infant mortality rate per 1000 births in the country                                                     |
+| Merged _HDI_Worldbank_Data v2 | Life expectancy at birth (years)                  | Float     | The life expectancy in years at birth in the country                                                         |
+| Merged _HDI_Worldbank_Data v2 | Population density (people per sq. km of land area) | Float | The number of people per square kilometer in the country                                                     |
+| Merged _HDI_Worldbank_Data v2 | Unemployment (% of total labor force) (modeled ILO estimate) | Float | The percentage of the labor force that is not employed                                                   |
+
