@@ -268,3 +268,15 @@ By removing these columns, the dataset now focuses on core indicators that direc
 | `Life expectancy at birth (years)`                             | 6.66             |
 | `Population density (people per sq. km of land area)`          | 1.65             |
 | `Unemployment (% of total labor force) (modeled ILO estimate)` | 9.40             |
+
+
+## Data Scraping
+  - `Script: ScrapperForElectricityConsumption.py`
+  - `Purpose: This script scrapes Wikipedia to obtain the latest electricity consumption data for countries worldwide. It focuses on gathering specific metrics like consumption per capita, year, and population.`
+  - `Output: The data collected is saved as ElectricityConsumption.csv for further processing.`
+
+## Handling Missing Values
+
+ - `Script: HandlingElectricityConsumptionMissingValues.py`
+ - `Purpose: This script takes the scraped data (ElectricityConsumption.csv) and fills in missing values for the "Electric power consumption (kWh per capita)" field in the WorldBank v2.csv dataset. It aligns records by the "Country      Code" field to ensure accurate matching and integration of values.`
+  - `Output: The final dataset with filled missing values is saved as WorldBank v3.csv.`
