@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Load both datasets
-merged_hdi = pd.read_csv('WorldBank v2.csv')
-electricity_consumption = pd.read_csv('Electricity_Consumption_First_Table.csv')
+merged_hdi = pd.read_csv('Processed DataSet/WorldBank v2.csv')
+electricity_consumption = pd.read_csv('Processed DataSet/Electricity_Consumption_First_Table.csv')
 print(electricity_consumption.columns)
 
 # Rename columns for consistency
@@ -29,4 +29,4 @@ for country in merged_data['Country Code'].unique():
 
 # Drop the helper column and save the result
 merged_data = merged_data.drop(columns=['Electricity Consumption'])
-merged_data.to_csv('WorldBank v3.csv', index=False)
+merged_data.to_csv('Processed DataSet/WorldBank v3.csv', index=False)

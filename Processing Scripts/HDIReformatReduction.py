@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the dataset
-file_path = '/Unprocessed DataSet/HDI.csv'
+file_path = 'Unprocessed DataSet/HDI.csv'
 data = pd.read_csv(file_path)
 
 # Melt the dataframe so that each year-indicator pair becomes a separate row
@@ -23,5 +23,5 @@ reshaped_data = melted_data.pivot_table(index=['iso3', 'country', 'hdicode', 're
                                         values='value').reset_index()
 
 # Save the transformed dataset to a new CSV file
-output_path = '/Processed DataSet/HDI Data v1.csv'
+output_path = 'Processed DataSet/HDI Data v1.csv'
 reshaped_data.to_csv(output_path, index=False)

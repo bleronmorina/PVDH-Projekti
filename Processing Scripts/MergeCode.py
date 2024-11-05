@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Load the datasets
-hdi_data = pd.read_csv('/Unprocessed DataSet/Transformed_HDI_Data.csv')
-world_bank_data = pd.read_csv('Unprocessed DataSet/WorldBank.csv')
+hdi_data = pd.read_csv('Processed DataSet/Transformed_HDI_Data.csv')
+world_bank_data = pd.read_csv('Processed DataSet/WorldBank.csv')
 
 # Filter both datasets for years from 1990 onwards
 hdi_data_filtered = hdi_data[hdi_data['year'] >= 1990]
@@ -18,4 +18,4 @@ merged_data = pd.merge(hdi_data_filtered, world_bank_data_filtered, on=['Country
 merged_data.head()
 
 # Save the merged dataset to a CSV file
-merged_data.to_csv('/Processed DataSet/Merged_HDI_WorldBank_Data.csv', index=False)
+merged_data.to_csv('Processed DataSet/Merged_HDI_WorldBank_Data.csv', index=False)

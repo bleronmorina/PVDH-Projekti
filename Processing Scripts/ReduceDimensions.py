@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the dataset (adjust file path as necessary)
-data = pd.read_csv('/Unprocessed DataSet/HDI.csv')
+data = pd.read_csv('Unprocessed DataSet/HDI.csv')
 
 # List of columns to remove
 columns_to_remove = ['loss', 'hdi_rank', 'gii_rank', 'gdi', 'gdi_group', 'rankdiff_hdi_phdi']
@@ -10,5 +10,5 @@ columns_to_remove = ['loss', 'hdi_rank', 'gii_rank', 'gdi', 'gdi_group', 'rankdi
 data = data.drop(columns=[col for col in columns_to_remove if col in data.columns])
 
 # Save the modified dataset (adjust file path as necessary)
-data.to_csv('/Processed DataSet/HDI Data v2.csv', index=False)
+data.to_csv('Processed DataSet/HDI Data v2.csv', index=False)
 

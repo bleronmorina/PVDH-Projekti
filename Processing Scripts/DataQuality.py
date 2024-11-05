@@ -3,7 +3,7 @@ from scipy import stats
 import numpy as np
 
 # Load the dataset
-file_path = 'C:/Users/blero/Git-Repo/PVDH-Projekti/Unprocessed DataSet/WorldBank.csv'  # Replace with your CSV file path
+file_path = 'Processed DataSet/Merged_HDI_WorldBank_Data v3.csv'  # Replace with your CSV file path
 df = pd.read_csv(file_path)
 
 # Calculate missing data as a percentage per column
