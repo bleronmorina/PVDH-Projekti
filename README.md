@@ -2,6 +2,29 @@
 
 Projekti nga lënda "Përgatitja dhe vizualizimi i të dhënave"
 
+## Introductory Information
+
+<img src="https://github.com/user-attachments/assets/9002855f-3f97-4b41-a180-85d1e24ad34a" alt="University Logo" width="150" align="right"/>
+
+**University of Prishtina**  
+**Faculty of Computer and Software Engineering**  
+Master’s Program in **Computer and Software Engineering**  
+Course: **Data preparation and visualization**
+
+## Course Professor
+
+- **Mergim Hoti**
+
+## Project Team Members (Group 5)
+
+- **Argjend Zekaj**
+- **Bleron Morina**
+- **Endrit Gjoka**
+
+---
+
+---
+
 ### Detyrat për Pjesën e I-rë - (15%)
 
 - **Para-procesimi për Përgatitjen e të Dhënave për Analizë**
@@ -15,6 +38,7 @@ Projekti nga lënda "Përgatitja dhe vizualizimi i të dhënave"
   - Diskretizimi, binarizimi, dhe transformimi i të dhënave.
 
 ---
+
 ## Data Collection
 
 For the collection of data for the World Economic Indicators dataset, various reliable sources were used, including data from the World Bank and the Human Development Index (HDI) from the United Nations (UN). The World Bank data covers the period from 1960 to 2018 and includes various economic and development indicators, such as electricity consumption, GDP per capita, life expectancy, and many others.
@@ -89,6 +113,7 @@ This data collection process aims to provide a comprehensive view of economic an
 | hdi       | diff_hdi_phdi_xxxx                                           | Float     | Difference from HDI value (%) in year xxxx                                                   |
 | hdi       | co2_prod_xxxx                                                | Float     | Carbon dioxide emissions per capita (production) (tonnes) in year xxxx                       |
 | hdi       | mf_xxxx                                                      | Float     | Material footprint per capita (tonnes) in year xxxx                                          |
+
 ---
 
 ## Preprocessing Data
@@ -149,7 +174,6 @@ Each column was evaluated for relevance to the project goals. Here’s why each 
 | `gdi_group`         | Classification based on the Gender Development Index.                   | Categorical grouping based on `gdi`, which isn’t needed for numerical analysis in this context.               |
 | `rankdiff_hdi_phdi` | Difference in rank between HDI and inequality-adjusted HDI (pHDI).      | Analysis focuses on the HDI and pHDI values themselves; rank differences do not provide additional insight.   |
 
-
 #### Summary
 
 By removing these columns, the dataset now focuses on core indicators that directly contribute to the analysis. This step reduces complexity and ensures that only the most relevant data points are retained, improving both the efficiency and clarity of further data processing and modeling.
@@ -166,8 +190,9 @@ By removing these columns, the dataset now focuses on core indicators that direc
 
 - **CountryNormalization.py**  
   A processing script that extracts all unique country information from the World Bank CSV file, creating a new file called `Countries.csv` with these unique values. It then fetches data from the HDI and World Bank datasets, removing extra country columns to standardize them. When additional country information is needed, this dataset or a join operation with `Countries.csv` can be used.
-  
+
 ---
+
 ### Processed Datasets
 
 - **Merged_HDI_WorldBank_Data.csv**  
@@ -183,6 +208,7 @@ By removing these columns, the dataset now focuses on core indicators that direc
   A processed dataset without the extra columns `Country Name` and `Region`.
 
 ---
+
 ## Defining Data Types After Table Integration
 
 | Table                                     | Field                                                        | Data Type | Description                                                                                  |
@@ -283,6 +309,7 @@ By removing these columns, the dataset now focuses on core indicators that direc
 | `Unemployment (% of total labor force) (modeled ILO estimate)` | 9.40             |
 
 ---
+
 ## Data Scraping
 
 - `Script: ScrapperForElectricityConsumption.py`
@@ -314,80 +341,85 @@ The dataset contains a variety of indicators related to economic, demographic, h
 ---
 
 #### 1. Identification and Basic Information
-   - `Country Code`: ISO3 country code.
-   - `Country`: Full country name.
-   - `Region`: Geographical region of the country.
-   - `hdicode`: HDI classification code.
-   - `Year`: The year of the data record.
-   - `IncomeGroup`: Income classification (e.g., Low, Middle, High).
+
+- `Country Code`: ISO3 country code.
+- `Country`: Full country name.
+- `Region`: Geographical region of the country.
+- `hdicode`: HDI classification code.
+- `Year`: The year of the data record.
+- `IncomeGroup`: Income classification (e.g., Low, Middle, High).
 
 ---
 
 #### 2. Economic Indicators
-   - `co2_prod`: CO2 production.
-   - `gnipc`: Gross National Income per capita.
-   - `gni_pc_f`: GNI per capita for females.
-   - `gni_pc_m`: GNI per capita for males.
-   - `GDP (USD)`: Gross Domestic Product in USD.
-   - `GDP per capita (USD)`: GDP per capita in USD.
-   - `Electric power consumption (kWh per capita)`: Per capita electricity consumption.
-   - `Unemployment (% of total labor force) (modeled ILO estimate)`: Unemployment rate based on ILO model.
+
+- `co2_prod`: CO2 production.
+- `gnipc`: Gross National Income per capita.
+- `gni_pc_f`: GNI per capita for females.
+- `gni_pc_m`: GNI per capita for males.
+- `GDP (USD)`: Gross Domestic Product in USD.
+- `GDP per capita (USD)`: GDP per capita in USD.
+- `Electric power consumption (kWh per capita)`: Per capita electricity consumption.
+- `Unemployment (% of total labor force) (modeled ILO estimate)`: Unemployment rate based on ILO model.
 
 ---
 
 #### 3. Health Indicators
-   - `abr`: Adolescent birth rate.
-   - `mmr`: Maternal mortality ratio.
-   - `Infant mortality rate (per 1,000 live births)`: Infant mortality rate.
-   - `Life expectancy at birth (years)`: Life expectancy.
-   - `le`: General life expectancy.
-   - `le_f`: Life expectancy for females.
-   - `le_m`: Life expectancy for males.
-   - `ihdi`: Inequality-adjusted HDI.
-   - `coef_ineq`: Coefficient of inequality.
-   - `ineq_edu`: Inequality in education.
-   - `ineq_inc`: Inequality in income.
-   - `ineq_le`: Inequality in life expectancy.
-   - `Individuals using the Internet (% of population)`: Internet usage percentage.
+
+- `abr`: Adolescent birth rate.
+- `mmr`: Maternal mortality ratio.
+- `Infant mortality rate (per 1,000 live births)`: Infant mortality rate.
+- `Life expectancy at birth (years)`: Life expectancy.
+- `le`: General life expectancy.
+- `le_f`: Life expectancy for females.
+- `le_m`: Life expectancy for males.
+- `ihdi`: Inequality-adjusted HDI.
+- `coef_ineq`: Coefficient of inequality.
+- `ineq_edu`: Inequality in education.
+- `ineq_inc`: Inequality in income.
+- `ineq_le`: Inequality in life expectancy.
+- `Individuals using the Internet (% of population)`: Internet usage percentage.
 
 ---
 
 #### 4. Education Indicators
-   - `eys`: Expected years of schooling.
-   - `eys_f`: Expected years of schooling for females.
-   - `eys_m`: Expected years of schooling for males.
-   - `mys`: Mean years of schooling.
-   - `mys_f`: Mean years of schooling for females.
-   - `mys_m`: Mean years of schooling for males.
-   - `se_f`: School enrollment rate for females.
-   - `se_m`: School enrollment rate for males.
-   - `pr_f`: Primary school completion rate for females.
-   - `pr_m`: Primary school completion rate for males.
-   - `gii`: Gender Inequality Index.
-   - `mf`: Male-to-female ratio.
+
+- `eys`: Expected years of schooling.
+- `eys_f`: Expected years of schooling for females.
+- `eys_m`: Expected years of schooling for males.
+- `mys`: Mean years of schooling.
+- `mys_f`: Mean years of schooling for females.
+- `mys_m`: Mean years of schooling for males.
+- `se_f`: School enrollment rate for females.
+- `se_m`: School enrollment rate for males.
+- `pr_f`: Primary school completion rate for females.
+- `pr_m`: Primary school completion rate for males.
+- `gii`: Gender Inequality Index.
+- `mf`: Male-to-female ratio.
 
 ---
 
 #### 5. Demographic Indicators
-   - `Population density (people per sq. km of land area)`: Population density.
-   - `Birth rate, crude (per 1,000 people)`: Crude birth rate.
-   - `Death rate, crude (per 1,000 people)`: Crude death rate.
-   - `lfpr_f`: Labor force participation rate for females.
-   - `lfpr_m`: Labor force participation rate for males.
+
+- `Population density (people per sq. km of land area)`: Population density.
+- `Birth rate, crude (per 1,000 people)`: Crude birth rate.
+- `Death rate, crude (per 1,000 people)`: Crude death rate.
+- `lfpr_f`: Labor force participation rate for females.
+- `lfpr_m`: Labor force participation rate for males.
 
 ---
 
 #### 6. Human Development Index (HDI) and Related Metrics
-   - `hdi`: Human Development Index.
-   - `hdi_f`: HDI for females.
-   - `hdi_m`: HDI for males.
-   - `diff_hdi_phdi`: Difference between HDI and pHDI.
-   - `phdi`: Poverty-adjusted HDI.
+
+- `hdi`: Human Development Index.
+- `hdi_f`: HDI for females.
+- `hdi_m`: HDI for males.
+- `diff_hdi_phdi`: Difference between HDI and pHDI.
+- `phdi`: Poverty-adjusted HDI.
 
 ---
 
 Each subset is organized to provide a clear view of indicators in categories such as economic, health, education, demographic, and human development. This structure supports targeted analyses in each domain.
-
 
 ### Discretization, Binarization, and Feature Creation
 
@@ -408,10 +440,12 @@ Thus, by keeping the data in its original form, we preserve its detail and ensur
 In this project, certain aggregation methods were not applied due to the following reasons:
 
 1. **Temporal Aggregation**:
+
    - We chose not to average data over time periods (e.g., decades) or use snapshots from specific years. Instead, the dataset maintains yearly data to preserve the granularity of changes over time. This allows for detailed analysis of year-over-year trends, which would be lost with temporal aggregation.
    - By keeping yearly records intact, we retain the ability to observe shorter-term fluctuations and trends, which can be valuable for identifying patterns that might be obscured in broader averages.
 
 2. **Geographic Aggregation**:
+
    - Data was not aggregated by region or income group in order to preserve individual country-level data. Aggregating by region could obscure country-specific trends and disparities, especially since countries within the same region may have significant differences in economic, social, and health indicators.
    - This approach ensures that we can conduct detailed analyses at the country level, providing a clearer picture of each country’s unique trajectory rather than generalizing across regions.
 
@@ -422,3 +456,11 @@ In this project, certain aggregation methods were not applied due to the followi
 By not performing these aggregation methods, we preserved the full detail of the dataset, enabling a more granular analysis of trends and patterns on a year-by-year and country-by-country basis.
 
 ---
+
+---
+
+### Detyrat për Pjesën e II-të - (15%)
+
+- **Detektimi i përjashtuesve.**
+- **Mënjanimi i zbulimeve jo të sakta**
+- **Eksplorimi i te dhënave: statistika përmbledhëse, multivariante.**
