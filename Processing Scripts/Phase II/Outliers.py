@@ -1,37 +1,65 @@
 import pandas as pd
-from scipy import stats
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy.stats import zscore
+from sklearn.ensemble import IsolationForest
 
 # Load the dataset
-file_path = 'Processed DataSet/Merged_HDI_WorldBank_Data v3.csv'  # Replace with your CSV file path
+file_path = 'Processed DataSet/Phase II/Modified_Dataset.csv'  # Replace with your file path
 df = pd.read_csv(file_path)
 
-# Calculate missing data as a percentage per column
-missing_data_percentage = df.isnull().mean() * 100
-missing_data_percentage = missing_data_percentage[missing_data_percentage > 0]
+# Select only numerical columns for outlier detection
+numerical_cols = df.select_dtypes(include=['float64', 'int64']).columns
+numerical_data = df[numerical_cols]
 
-# Check for negative values in columns where negative values may not make sense
-# Define columns where negative values are logically invalid
-invalid_negative_columns = []  # Fill in columns manually based on your dataset knowledge
+# Step 1: Z-Score Method
+z_scores = np.abs(zscore(numerical_data, nan_policy='omit'))
+z_threshold = 3
+outliers_zscore = (z_scores > z_threshold).any(axis=1)
 
-# Automatically detect columns where negative values may not make sense (optional)
-# You might want to manually add more column names to 'invalid_negative_columns' if needed.
-# For example, only consider numerical columns with names that suggest counts, measurements, etc.
-for column in df.select_dtypes(include=['number']).columns:
-    if column.lower().startswith(('age', 'population', 'income', 'gdp', 'count', 'number', 'rate')):
-        invalid_negative_columns.append(column)
+# Step 2: Interquartile Range (IQR) Method
+Q1 = numerical_data.quantile(0.25)
+Q3 = numerical_data.quantile(0.75)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+outliers_iqr = ((numerical_data < lower_bound) | (numerical_data > upper_bound)).any(axis=1)
 
-# Check for negative values
-negative_data_counts = {}
-for column in invalid_negative_columns:
-    negative_count = (df[column] < 0).sum()
-    if negative_count > 0:
-        negative_data_counts[column] = negative_count / len(df) * 100  # Percentage of negative values
+# Step 3: Isolation Forest (Machine Learning Approach)
+iso_forest = IsolationForest(contamination=0.01, random_state=42)
+outlier_pred = iso_forest.fit_predict(numerical_data.fillna(0))  # Filling NaN values temporarily
+outliers_iso = outlier_pred == -1
 
-# Display results
-print("Missing Data Percentage per Column:")
-print(missing_data_percentage)
+# Combine Results from All Methods
+combined_outliers = outliers_zscore | outliers_iqr | outliers_iso
 
-print("\nColumns with Invalid Negative Values (as percentage of total):")
-for column, percentage in negative_data_counts.items():
-    print(f"{column}: {percentage:.2f}%")
+# Analyze Results
+outlier_counts = {
+    'Z-Score Method': outliers_zscore.sum(),
+    'IQR Method': outliers_iqr.sum(),
+    'Isolation Forest': outliers_iso.sum(),
+    'Combined': combined_outliers.sum()
+}
+
+# Visualize Outliers
+plt.figure(figsize=(12, 8))
+sns.boxplot(data=numerical_data, orient='h', palette='Set2')
+plt.title("Boxplot of Numerical Features to Visualize Potential Outliers")
+plt.show()
+
+# Save the outliers to a new CSV file
+outliers_df = df[combined_outliers]
+outliers_df.to_csv('Processed DataSet/Phase II/Detected_Outliers.csv', index=False)
+
+# Summary
+print("Outlier Detection Summary:")
+print(outlier_counts)
+print(f"Total rows flagged as outliers: {combined_outliers.sum()} out of {len(df)}")
+
+# Save dataset without outliers
+cleaned_df = df[~combined_outliers]
+cleaned_df.to_csv('Processed DataSet/Phase II/Cleaned_Data.csv', index=False)
+
+print("Outliers have been saved to 'Processed DataSet/Phase II/Detected_Outliers.csv'.")
+print("Cleaned dataset has been saved to 'Processed DataSet/Phase II/Cleaned_Data.csv'.")

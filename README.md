@@ -465,50 +465,74 @@ By not performing these aggregation methods, we preserved the full detail of the
 - **Mënjanimi i zbulimeve jo të sakta**
 - **Eksplorimi i te dhënave: statistika përmbledhëse, multivariante.**
 
-## Detektimi i përjashtuesve
-A Python script (Outliers.py) is designed to detect potential outliers and anomalies in a dataset by analyzing missing data percentages and identifying columns with logically invalid negative values.
+## Outlier Detection
 
-The purpose of this script is to:
+This Python script (`Outliers.py`) is designed to detect and analyze potential outliers in a dataset using multiple statistical and machine learning methods. By combining traditional techniques like Z-Score and Interquartile Range (IQR) with advanced approaches like Isolation Forest, it provides a comprehensive view of data anomalies.
 
-1. **Identify and quantify missing data across all columns in the dataset.**
+### Features
 
-2. **Detect columns where negative values are logically invalid and quantify these anomalies as a percentage of the dataset.**
+1. **Outlier Detection Methods:**
+   - **Z-Score Method:** Identifies outliers based on the standard deviation of data points.
+   - **IQR Method:** Flags outliers that fall outside the interquartile range.
+   - **Isolation Forest:** A machine learning-based method for detecting anomalies.
 
-3. **Provide a foundation for data cleaning and preprocessing to improve the quality of analyses performed on the dataset.**
+2. **Visualization:**
+   - Generates boxplots for numerical columns to visualize potential outliers.
 
-#### Example Outputs
+3. **Results:**
+   - Saves detected outliers to a separate file (`Detected_Outliers.csv`).
+   - Outputs a cleaned dataset without outliers (`Cleaned_Data.csv`).
 
-1. **Missing Data Percentage per Column:**
+4. **Summary Statistics:**
+   - Provides a detailed count of outliers detected by each method and combined results.
 
-- Column A: 12.5%
-- Column B: 8.2%
+### How It Works
 
-2. **Columns with Invalid Negative Values (as percentage of total):**
-- GDP: 0.03%
-- Population: 0.01%
+1. **Load the Dataset:**
+   The script reads the dataset (`Modifiet_Dataset.csv`) and focuses on numerical columns for outlier detection.
 
-#### Why This is Important
+2. **Apply Outlier Detection Methods:**
+   - **Z-Score:** Flags data points with a Z-score greater than 3.
+   - **IQR:** Identifies outliers beyond 1.5 times the interquartile range.
+   - **Isolation Forest:** Uses a contamination rate of 1% to detect anomalies.
 
-- **Improved Data Quality: Detecting and addressing missing data ensures that analyses based on this dataset are reliable and accurate.**
+3. **Combine Results:**
+   Outliers detected by any method are flagged as combined outliers.
 
-- **Logical Integrity: Identifying columns with invalid negative values prevents the propagation of anomalies in downstream computations.**
+4. **Visualize and Save Results:**
+   - Displays boxplots for better understanding.
+   - Saves both outliers and a cleaned dataset for further analysis.
 
-- **Efficiency in Preprocessing: By automating these checks, the script reduces the time required to manually identify and handle data issues.**
+### Example Outputs
 
-#### Next steps (Improving): 
+#### Outlier Detection Summary
+```
+Outlier Detection Summary:
+Z-Score Method: 150 outliers
+IQR Method: 200 outliers
+Isolation Forest: 180 outliers
+Combined: 250 outliers
+Total rows flagged as outliers: 250 out of 10,000
+```
 
-1. **Handle Missing Data:**
 
-- Impute missing values using appropriate statistical methods.
+### Why This is Important
 
-- Drop columns or rows with excessive missing data, if necessary.
+- **Improved Data Quality:** Removing outliers ensures more reliable and accurate analyses.
+- **Enhanced Insights:** Helps identify anomalies that may distort results.
+- **Efficiency:** Automates the detection process, saving time and effort.
 
-2. **Correct Invalid Negative Values:**
+### Next Steps
 
-- Replace negative values with nulls or appropriate estimates.
+1. **Refine Detection Parameters:**
+   - Adjust thresholds (e.g., Z-score, IQR multiplier, contamination rate) for better precision.
 
-3. **Enhance the Script:**
+2. **Handle Detected Outliers:**
+   - Investigate flagged data points to decide on removal or correction.
 
-- Add visualizations to better understand the distribution of data anomalies.
+3. **Enhance Visualization:**
+   - Add interactive plots for better exploration of outliers.
 
-- Expand the heuristics for identifying invalid data in additional contexts.
+4. **Expand Functionality:**
+   - Include categorical data anomaly detection.
+   - Incorporate domain-specific rules for outlier identification.
