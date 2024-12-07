@@ -536,3 +536,27 @@ Total rows flagged as outliers: 250 out of 10,000
 4. **Expand Functionality:**
    - Include categorical data anomaly detection.
    - Incorporate domain-specific rules for outlier identification.
+
+
+## Fake Discoveries Removal
+
+This script focuses on identifying and removing fake or inaccurate data points, ensuring that the dataset remains reliable and ready for analysis. By addressing common data quality issues such as missing values and duplicate records, it prepares the data for more accurate insights and decision-making.
+
+## Features
+
+### 1. Handle Missing Values
+- **Numerical Columns:** Missing values are replaced with the column mean to maintain data consistency.
+- **Categorical Columns:** Missing values are replaced with the mode (most frequent value) for logical coherence.
+
+### 2. Remove Duplicates
+Ensures data integrity by removing duplicate rows, leaving only unique records.
+
+### 3. Save Cleaned Dataset
+The cleaned dataset is saved as `cleaned_dataset.csv` for further use.
+
+## How is done
+3. **Run the Script** .
+4. **Cleaned Dataset Output:** After execution, the cleaned dataset will be saved in the same directory as a new file named `Removed_Fake_Discoveries.csv`.
+
+
+
