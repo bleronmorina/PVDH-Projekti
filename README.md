@@ -464,3 +464,51 @@ By not performing these aggregation methods, we preserved the full detail of the
 - **Detektimi i përjashtuesve.**
 - **Mënjanimi i zbulimeve jo të sakta**
 - **Eksplorimi i te dhënave: statistika përmbledhëse, multivariante.**
+
+## Detektimi i përjashtuesve
+A Python script (Outliers.py) is designed to detect potential outliers and anomalies in a dataset by analyzing missing data percentages and identifying columns with logically invalid negative values.
+
+The purpose of this script is to:
+
+1. **Identify and quantify missing data across all columns in the dataset.**
+
+2. **Detect columns where negative values are logically invalid and quantify these anomalies as a percentage of the dataset.**
+
+3. **Provide a foundation for data cleaning and preprocessing to improve the quality of analyses performed on the dataset.**
+
+#### Example Outputs
+
+1. **Missing Data Percentage per Column:**
+
+- Column A: 12.5%
+- Column B: 8.2%
+
+2. **Columns with Invalid Negative Values (as percentage of total):**
+- GDP: 0.03%
+- Population: 0.01%
+
+#### Why This is Important
+
+- **Improved Data Quality: Detecting and addressing missing data ensures that analyses based on this dataset are reliable and accurate.**
+
+- **Logical Integrity: Identifying columns with invalid negative values prevents the propagation of anomalies in downstream computations.**
+
+- **Efficiency in Preprocessing: By automating these checks, the script reduces the time required to manually identify and handle data issues.**
+
+#### Next steps (Improving): 
+
+1. **Handle Missing Data:**
+
+- Impute missing values using appropriate statistical methods.
+
+- Drop columns or rows with excessive missing data, if necessary.
+
+2. **Correct Invalid Negative Values:**
+
+- Replace negative values with nulls or appropriate estimates.
+
+3. **Enhance the Script:**
+
+- Add visualizations to better understand the distribution of data anomalies.
+
+- Expand the heuristics for identifying invalid data in additional contexts.
