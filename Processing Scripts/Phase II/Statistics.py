@@ -20,7 +20,6 @@ except FileNotFoundError as e:
 # Set default dataset for analysis
 data = data_cleaned
 
-print(data.columns)
 # **Helper Functions**
 
 def display_statistics(dataset):
@@ -83,6 +82,7 @@ def plot_pairwise_relationships(dataset):
 
 def plot_distributions(dataset):
     """Plot distributions of key numerical and categorical columns in a dataset."""
+    # Numerical column distributions
     columns_to_plot = ['HDI', 'GDP per capita (USD)', 'Life expectancy at birth (years)', 
                        'Individuals using the Internet (%)']
     for column in columns_to_plot:
@@ -92,8 +92,13 @@ def plot_distributions(dataset):
             plt.xlabel(column)
             plt.ylabel("Frequency")
             plt.show()
-    # Categorical distribution
-    categorical_cols = dataset.select_dtypes(include=['object']).columns
+
+    # Categorical column distributions (excluding 'Country' and 'Country Code')
+    excluded_columns = ['Country', 'Country Code']
+    categorical_cols = [
+        column for column in dataset.select_dtypes(include=['object']).columns
+        if column not in excluded_columns
+    ]
     for column in categorical_cols:
         sns.countplot(y=dataset[column], order=dataset[column].value_counts().index)
         plt.title(f"Category Distribution for {column}")
