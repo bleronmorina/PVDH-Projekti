@@ -472,14 +472,17 @@ This Python script (`Outliers.py`) is designed to detect and analyze potential o
 ### Features
 
 1. **Outlier Detection Methods:**
+
    - **Z-Score Method:** Identifies outliers based on the standard deviation of data points.
    - **IQR Method:** Flags outliers that fall outside the interquartile range.
    - **Isolation Forest:** A machine learning-based method for detecting anomalies.
 
 2. **Visualization:**
+
    - Generates boxplots for numerical columns to visualize potential outliers.
 
 3. **Results:**
+
    - Saves detected outliers to a separate file (`Detected_Outliers.csv`).
    - Outputs a cleaned dataset without outliers (`Cleaned_Data.csv`).
 
@@ -492,6 +495,7 @@ This Python script (`Outliers.py`) is designed to detect and analyze potential o
    The script reads the dataset (`Modifiet_Dataset.csv`) and focuses on numerical columns for outlier detection.
 
 2. **Apply Outlier Detection Methods:**
+
    - **Z-Score:** Flags data points with a Z-score greater than 3.
    - **IQR:** Identifies outliers beyond 1.5 times the interquartile range.
    - **Isolation Forest:** Uses a contamination rate of 1% to detect anomalies.
@@ -506,6 +510,7 @@ This Python script (`Outliers.py`) is designed to detect and analyze potential o
 ### Example Outputs
 
 #### Outlier Detection Summary
+
 ```
 Outlier Detection Summary:
 Z-Score Method: 150 outliers
@@ -514,7 +519,6 @@ Isolation Forest: 180 outliers
 Combined: 250 outliers
 Total rows flagged as outliers: 250 out of 10,000
 ```
-
 
 ### Why This is Important
 
@@ -525,18 +529,20 @@ Total rows flagged as outliers: 250 out of 10,000
 ### Next Steps
 
 1. **Refine Detection Parameters:**
+
    - Adjust thresholds (e.g., Z-score, IQR multiplier, contamination rate) for better precision.
 
 2. **Handle Detected Outliers:**
+
    - Investigate flagged data points to decide on removal or correction.
 
 3. **Enhance Visualization:**
+
    - Add interactive plots for better exploration of outliers.
 
 4. **Expand Functionality:**
    - Include categorical data anomaly detection.
    - Incorporate domain-specific rules for outlier identification.
-
 
 ## Fake Discoveries Removal
 
@@ -545,18 +551,104 @@ This script focuses on identifying and removing fake or inaccurate data points, 
 ## Features
 
 ### 1. Handle Missing Values
+
 - **Numerical Columns:** Missing values are replaced with the column mean to maintain data consistency.
 - **Categorical Columns:** Missing values are replaced with the mode (most frequent value) for logical coherence.
 
 ### 2. Remove Duplicates
+
 Ensures data integrity by removing duplicate rows, leaving only unique records.
 
 ### 3. Save Cleaned Dataset
+
 The cleaned dataset is saved as `cleaned_dataset.csv` for further use.
 
 ## How is done
+
 3. **Run the Script** .
 4. **Cleaned Dataset Output:** After execution, the cleaned dataset will be saved in the same directory as a new file named `Removed_Fake_Discoveries.csv`.
 
+---
 
+## Summary and Multivariate Statistics
 
+This part of the readme gives an overview of the Python script developed for exploring and analyzing datasets in the context of socio-economic and human development indicators. The script is made to meet the requirements of this phase, focusing on summary statistics and multivariate analysis.
+
+---
+
+## Purpose
+
+The primary goal of this script is to:
+
+1. **Explore Datasets**: Provide a detailed understanding of the data through summary statistics and visualizations.
+2. **Analyze Relationships**: Investigate multivariate relationships between key socio-economic indicators, such as GDP per capita, HDI, life expectancy, and internet usage.
+3. **Visualize Patterns**: Use plots and graphs to uncover trends, correlations, and distributions in the data.
+
+---
+
+## Key Functionalities
+
+### 1. Summary Statistics
+
+- **What It Does**: Displays basic statistics (mean, median, standard deviation, etc.) for numerical columns in the dataset.
+- **Why It Matters**: Helps identify key characteristics of the data and spot potential anomalies.
+- **Example Output**: Summary tables showing metrics for columns like GDP, HDI, and life expectancy.
+
+---
+
+### 2. Missing Data Analysis
+
+- **What It Does**: Identifies and visualizes missing values in the dataset using heatmaps.
+- **Why It Matters**: Highlights data quality issues and areas requiring cleaning.
+- **Visual Example**: Heatmaps indicating where data is missing.
+
+---
+
+### 3. Correlation Analysis
+
+- **What It Does**: Generates a correlation matrix to show relationships between numerical variables.
+- **Why It Matters**: Reveals how strongly variables are related, e.g., the link between HDI and GDP.
+- **Visual Example**: Heatmaps showing correlations, with strongest relationships highlighted.
+
+---
+
+### 4. Distribution Analysis
+
+- **What It Does**: Plots histograms and KDE (Kernel Density Estimation) curves for key variables.
+- **Why It Matters**: Provides insight into the distribution of variables like income, life expectancy, and internet usage.
+- **Visual Example**: Histograms displaying the spread of GDP or HDI values.
+
+---
+
+### 5. Multivariate Relationships
+
+- **What It Does**: Explores relationships between multiple variables, such as the impact of GDP per capita on HDI.
+- **Why It Matters**: Multivariate analysis helps understand complex interactions between socio-economic indicators.
+- **Visual Example**: Scatterplots of GDP vs. HDI, categorized by region.
+
+---
+
+### 6. Dataset Comparisons
+
+- **What It Does**: Compares initial and cleaned datasets to evaluate the impact of preprocessing, such as handling missing data.
+- **Why It Matters**: Demonstrates the importance of data cleaning in improving data quality.
+
+---
+
+## Example Workflow
+
+1. **Load the Data**: Import the datasets for analysis.
+2. **Summarize the Data**: Use the summary statistics function to get an overview of the data.
+3. **Identify Missing Data**: Visualize and address gaps in the dataset.
+4. **Analyze Relationships**: Explore correlations and trends between variables.
+5. **Visualize Results**: Generate plots for both univariate and multivariate analysis.
+
+---
+
+## Summary
+
+This script is a structured approach to exploring datasets, enabling detailed analysis and visualization of socio-economic indicators. It focuses on:
+
+- Descriptive statistics.
+- Multivariate analysis.
+- Visualization of patterns and trends.
